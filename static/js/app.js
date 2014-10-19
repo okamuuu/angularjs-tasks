@@ -1,21 +1,21 @@
-var phonecatApp = angular.module('phonecatApp', [
+var taskApp = angular.module('taskApp', [
   'ngRoute',
-  'phonecatControllers',
-  'phonecatServices'
+  'taskControllers',
+  'taskServices'
 ]);
 
-phonecatApp.config(['$routeProvider',
+taskApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-      when('/phones', {
-        templateUrl: 'partials/phone-list.html',
-        controller: 'PhoneListCtrl'
+      when('/tasks', {
+        templateUrl: 'partials/task-list.html',
+        controller: 'TaskListCtrl'
       }).
-      when('/phones/:id', {
-        templateUrl: 'partials/phone-detail.html',
-        controller: 'PhoneDetailCtrl'
-      }).
+//      when('/tasks/:id', {
+//        templateUrl: 'partials/task-detail.html',
+//        controller: 'TaskDetailCtrl'
+//      }).
       otherwise({
-        redirectTo: '/phones'
+        redirectTo: '/tasks'
       });
   }]);

@@ -1,38 +1,67 @@
 router = require('express').Router()
 
-phones = [
-  {
-    "id": "nexus",
-    'name': 'Nexus S',
-    'snippet': 'Fast just got faster with Nexus S.'
-    age: 1
-  }
-  {
-    "id": "motorola-defy-with-motoblur",
-    'name': 'Motorola XOOM™ with Wi-Fi',
-    'snippet': 'The Next, Next Generation tablet.'
-    age: 2
-  }
-  {
-    "id": "motorola",
-    'name': 'MOTOROLA XOOM™',
-    'snippet': 'The Next, Next Generation tablet.'
-    age: 3
-  }
-]
+tasks = [
+    {id: 1, title: 'title1', desc: 'desc1', done: true},
+    {id: 2, title: 'title2', desc: 'desc2', done: false},
+  ]
+
+lastIndex = 2
 
 router.get '/', (req, res)->
   res.json { message: 'hooray! welcome to our api!' }
 
-router.get '/phones', (req, res)->
-  res.json phones
+router.get '/tasks', (req, res)->
+  res.json tasks
 
-router.get '/phones/:id', (req, res)->
+router.get '/tasks/:id', (req, res)->
 
-  for phone in phones
-    if phone.id is req.params.id
-      return res.json phone
+  targetId = parseInt req.params.id, 10
 
-  res.json {}
+  for task in tasks
+    if task.id is targetId
+      return res.json task
+
+  res.json task
+
+router.put '/tasks/:id', (req, res)->
+  
+  targetId = parseInt req.params.id, 10
+  
+  targetTask
+  for task in tasks
+    if task.id is targetId
+      targetTask = task
+
+  return res.json {status:'ng'} if not targetTask
+
+  task.title = req.body.title if req.body.title isnt null
+  task.done = req.body.done if req.body.done isnt null
+  
+  res.json task
+
+router.delete '/tasks/:id', (req, res)->
+  
+  targetId = parseInt req.params.id, 10
+  
+  targetIndex = 0
+  for task in tasks
+    if task.id is targetId
+      break
+    targetIndex += 1
+
+  return res.json {status:'ng'} if not targetIndex
+
+  tasks.splice targetIndex, 1
+  res.json {status:'ok'}
+
+router.post '/tasks', (req, res)->
+
+  lastIndex += 1
+  tasks.push {
+    id: lastIndex
+    title: req.body.title
+    done: req.body.done or false
+  }
+  res.json {status:'ok'}
 
 module.exports = router
