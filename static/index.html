@@ -2,7 +2,7 @@
 <html lang="en" data-ng-app="phonecatApp">
 <head>
   <meta charset="utf-8">
-  <title>My HTML File</title>
+  <title data-ng-bind-template="Google Phone Gallery: {{query}}">Google Phone Gallery</title>
   <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="/css/app.css">
   <script type="text/javascript" src="/components/angularjs/angular.js"></script>
@@ -10,12 +10,30 @@
 </head>
 <body data-ng-controller="PhoneListCtrl">
 
-  <ul>
-    <li data-ng-repeat="phone in phones">
-      {{phone.name}}
-      <p>{{phone.snippet}}</p>
-    </li>
-  </ul>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <!--Sidebar content-->
 
+      Search: <input data-ng-model="query">
+      Srot by:
+      <select data-ng-model="orderProp">
+        <option value="name">Alphabetical</option>
+        <option value="age">Newest</option>
+      </select>
+    </div>
+    <div class="col-md-10">
+      <!--Body content-->
+
+      <ul class="phones">
+        <li data-ng-repeat="phone in phones | filter:query | orderBy:orderProp">
+          {{phone.name}}
+          <p>{{phone.snippet}}</p>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>
 </body>
 </html>

@@ -11,12 +11,9 @@ app.use bodyParser.json()
 
 port = process.env.PORT or 8080
 
-router = express.Router()
+apiRouter = require __dirname + '/app/routes/api'
 
-router.get '/', (req, res)->
-  res.json { message: 'hooray! welcome to our api!' }
-
-app.use '/api', router
+app.use '/api', apiRouter
 app.use '/', express.static(__dirname + '/static')
 
 if not module.parent
