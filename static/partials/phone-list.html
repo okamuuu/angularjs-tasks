@@ -1,27 +1,9 @@
-<div class="container-fluid">
-<div class="row">
-  <div class="col-md-2">
-    <!--Sidebar content-->
-
-    Search: <input ng-model="query">
-    Sort by:
-    <select ng-model="orderProp">
-      <option value="name">Alphabetical</option>
-      <option value="age">Newest</option>
-    </select>
-
-  </div>
-  <div class="col-md-10">
-    <!--Body content-->
-
-    <ul class="phones">
-      <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail">
-        <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
-        <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
-        <p>{{phone.snippet}}</p>
-      </li>
-    </ul>
-
-  </div>
-</div>
+<div class="container center-block" style="margin-top:15px;width:460px;">
+  <ul class="list-group">    
+    <li class="list-group-item clearfix" ng-repeat="phone in phones">
+      <div class="toggle float-left" style="width:30px;"><span class="glyphicon glyphicon-ok" style="cursor:pointer;color:#428bca"></span></div>
+      <div class="float-left">{{phone.name}}</div>
+      <div class="remove float-right glyphicon glyphicon-remove" style="cursor:pointer;"></div>
+    </li>
+  </ul>
 </div>

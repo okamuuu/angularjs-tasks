@@ -1,6 +1,7 @@
 var phonecatApp = angular.module('phonecatApp', [
   'ngRoute',
-  'phonecatControllers'
+  'phonecatControllers',
+  'phonecatServices'
 ]);
 
 phonecatApp.config(['$routeProvider',
@@ -10,7 +11,7 @@ phonecatApp.config(['$routeProvider',
         templateUrl: 'partials/phone-list.html',
         controller: 'PhoneListCtrl'
       }).
-      when('/phones/:phoneId', {
+      when('/phones/:id', {
         templateUrl: 'partials/phone-detail.html',
         controller: 'PhoneDetailCtrl'
       }).

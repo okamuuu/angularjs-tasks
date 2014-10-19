@@ -1,15 +1,11 @@
 var phonecatControllers = angular.module('phonecatControllers', []);
 
-phonecatControllers.controller('PhoneListCtrl', function ($scope, $http) {
-  $http.get('api/phones').success(function(data) {
-    $scope.phones = data;
-  });
-
+phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone', function ($scope, Phone) {
+  $scope.phones = Phone.query();
   $scope.orderProp = 'age';
-});
+}]);
 
-phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
-    $scope.phoneId = $routeParams.phoneId;
-  }
-]);
+phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone', function($scope, $routeParams, Phone) {
+  console.log($routeParams);
+  $scope.phone = Phone.get({id: $routeParams.id});
+}]);
