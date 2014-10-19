@@ -17,6 +17,7 @@ router.get '/', (req, res)->
   res.json { message: 'hooray! welcome to our api!' }
 
 app.use '/api', router
+app.use '/', express.static(__dirname + '/static')
 
 if not module.parent
   app.listen port
